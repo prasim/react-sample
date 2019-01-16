@@ -1,0 +1,6 @@
+:local(.input-div) {
+    display: flex;
+}
+:local(.input-text) {
+    width: 100%;
+}

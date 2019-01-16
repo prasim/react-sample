@@ -1,0 +1,7 @@
+:local(.box) {
+    width: 50%;
+    margin: auto;
+}
+:local(.expansion-details) {
+    flex-direction: column;
+}

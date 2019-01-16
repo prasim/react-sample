@@ -3,7 +3,7 @@ import _superagent from 'superagent';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'https://conduit.productionready.io/api';
+const API_ROOT = 'http://localhost:3000/api';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
@@ -36,6 +36,20 @@ const Auth = {
   save: user =>
     requests.put('/user', { user })
 };
+
+const Days = {
+  getAll: (author) => 
+    requests.get(`/days?author=${encode(author)}`),
+  create: days =>
+    requests.post('/days', { days })
+};
+
+const Tasks = {
+  addTask: (date, author, tasks) =>
+    requests.post(`/days/${date}/tasks?author=${encode(author)}`, { tasks }),
+  updateTask: (date, author, tasks) =>
+    requests.put(`/days/${date}/tasks/${tasks.id}?author=${encode(author)}`, { tasks }),
+}
 
 const Tags = {
   getAll: () => requests.get('/tags')
@@ -92,5 +106,7 @@ export default {
   Comments,
   Profile,
   Tags,
+  Days,
+  Tasks,
   setToken: _token => { token = _token; }
 };
